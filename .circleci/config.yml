@@ -21,7 +21,7 @@ jobs:
       - run : cd 3w5-h22-tp2-backend && mkdir public
       - run : cd ..
       - run : cd 3w5-h22-tp2-frontend
-      - run : cp -rT 3w5-h22-tp2-frontend/build ../3w5-h22-tp2-backend/public 
+      - run : cp -rT 3w5-h22-tp2-frontend/build ./3w5-h22-tp2-backend/public 
   deploy:
     docker:
       - image: cimg/node:17.4.0
