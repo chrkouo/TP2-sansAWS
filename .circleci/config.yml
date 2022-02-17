@@ -8,7 +8,6 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - node/test
   integrateFrontend:
     docker:
       - image: cimg/node:17.4.0
@@ -34,7 +33,10 @@ jobs:
 workflows:
   build:
     jobs:
+     - node/test
      - checkoutAndTest:
+          requires:
+            - node/test
      - integrateFrontend:
           requires:
             - checkoutAndTest
