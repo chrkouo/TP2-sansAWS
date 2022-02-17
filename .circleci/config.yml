@@ -2,32 +2,32 @@ version: "2.1"
 orbs:
   node: circleci/node@5.0.0
 jobs:
-checkoutAndTest:
-  docker:
-    - image: cimg/node:17.4.0
-  steps:
+  checkoutAndTest:
+    docker:
+      - image: cimg/node:17.4.0
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run test
+  integrateFrontend:
+    docker:
+      - image: cimg/node:17.4.0
+    steps:
+      - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-backend.git
+      - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-frontend.git
+      - run : cd 3w5-h22-tp2-frontend && npm install
+      - run : npm build
+      - run : cd ..
+      - run : cd 3w5-h22-tp2-backend && mkdir public
+      - run : cd ..
+      - run : cd 3w5-h22-tp2-frontend
+      - run : cp -rT /build /3w5-h22-tp2-backend/public 
+  deploy:
+    docker:
+      - image: cimg/node:17.4.0
+    steps:
     - checkout
-    - run: npm install
-    - run: npm run test
-integrateFrontend:
-  docker:
-    - image: cimg/node:17.4.0
-  steps:
-    - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-backend.git
-    - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-frontend.git
-    - run : cd 3w5-h22-tp2-frontend && npm install
-    - run : npm build
-    - run : cd ..
-    - run : cd 3w5-h22-tp2-backend && mkdir public
-    - run : cd ..
-    - run : cd 3w5-h22-tp2-frontend
-    - run : cp -rT /build /3w5-h22-tp2-backend/public 
-deploy:
-  docker:
-    - image: cimg/node:17.4.0
-  steps:
-   - checkout
-   - run : ls -Rl
+    - run : ls -Rl
 workflows:
   build:
     jobs:
