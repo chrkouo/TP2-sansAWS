@@ -16,7 +16,7 @@ jobs:
       - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-backend.git
       - run : git clone https://github.com/XavierSamuelHuppe/3w5-h22-tp2-frontend.git
       - run : cd 3w5-h22-tp2-frontend && npm install
-      - run : npm run build
+      - run : cd 3w5-h22-tp2-frontend && npm run build
       - run : cd ..
       - run : cd 3w5-h22-tp2-backend && mkdir public
       - run : cd ..
