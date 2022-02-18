@@ -2,12 +2,6 @@ version: "2.1"
 orbs:
   node: circleci/node@5.0.0
 jobs:
-  checkoutAndTest:
-    docker:
-      - image: cimg/node:17.4.0
-    steps:
-      - checkout
-      - run: npm install
   integrateFrontend:
     docker:
       - image: cimg/node:17.4.0
@@ -34,12 +28,9 @@ workflows:
   build:
     jobs:
      - node/test
-     - checkoutAndTest:
-          requires:
-            - node/test
      - integrateFrontend:
           requires:
-            - checkoutAndTest
+            - node/test
      - deploy:
           requires:
             - integrateFrontend
